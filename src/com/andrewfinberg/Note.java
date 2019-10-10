@@ -5,9 +5,9 @@ import java.util.HashMap;
 
 /**
  * This is a class to build a single musical note
- * @author andrewfinberg
+ * @author andrewfinberg 10/10/2019
  */
-public class Note {
+public class Note implements Comparable {
     private String noteName;
     private String noteDuration;
 
@@ -29,6 +29,11 @@ public class Note {
         map.put("F#", 9);
         map.put("G", 10);
         map.put("G#", 11);
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
     }
 
     public Note() {
@@ -71,16 +76,18 @@ public class Note {
 
     /**
      * This method allows the user to get the frequency of the selected note
+     *
      * @return This statement returns the frequency in Hz
      */
     public double getFrequency() {
-        double frequency = 440.0 * Math.pow(2.0, this.map.get(noteName)/12.0);
+        double frequency = 440.0 * Math.pow(2.0, this.map.get(noteName) / 12.0);
         DecimalFormat df = new DecimalFormat("###.##");
         return frequency;
     }
 
     /**
      * This method allows the user to determine if the selected note is natural or sharp
+     *
      * @return This statement returns true if the note is sharp, or false if the note is natural
      */
     public boolean isSharp() {
@@ -88,4 +95,5 @@ public class Note {
             return true;
         } else return false;
     }
+
 }
