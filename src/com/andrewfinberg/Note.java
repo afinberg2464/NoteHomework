@@ -85,4 +85,12 @@ public class Note implements Comparable<Note> {
         this.frequency = frequency;
     }
 
+    @Override
+    public String toString() {
+        return "Note{" +
+                "noteName='" + noteName + '\'' +
+                ", noteDuration=" + noteDuration +
+                ", frequency=" + frequency +
+                '}';
+    }
 }
