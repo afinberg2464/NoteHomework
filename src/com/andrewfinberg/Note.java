@@ -8,7 +8,7 @@ import java.util.HashMap;
  */
 public class Note implements Comparable<Note> {
     private String noteName;
-    private int noteDuration;
+    private int duration;
     private double frequency;
 
     /**
@@ -31,20 +31,34 @@ public class Note implements Comparable<Note> {
         map.put("G#", 11);
     }
 
+    /**
+     * This method first sorts the notes by duration, then by frequency
+     * @param other the second note in the comparison
+     * @return the result of the comparison
+     */
     @Override
     public int compareTo(Note other) {
-        int i;
-        if (getFrequency() > other.getFrequency())
-            i = 1;
+        if (getDuration() > other.getDuration())
+            return 1;
+        else if (getDuration() < other.getDuration())
+            return -1;
+        else if (getFrequency() > other.getFrequency())
+            return 1;
         else if (getFrequency() < other.getFrequency())
-            i = -1;
-        else i = 0;
-        return i;
+            return -1;
+        else
+            return 0;
     }
 
-    public Note(String noteName, int noteDuration) {
+    /**
+     * This constructor sets the note and duration
+     * and calculates the frequency in Hz
+     * @param noteName note name
+     * @param duration duration
+     */
+    public Note(String noteName, int duration) {
         this.noteName = noteName;
-        this.noteDuration = noteDuration;
+        this.duration = duration;
 
         DecimalFormat df = new DecimalFormat("#.##");
         double f = 440.0 * Math.pow(2.0, this.map.get(noteName) / 12.0);
@@ -69,12 +83,15 @@ public class Note implements Comparable<Note> {
         this.noteName = noteName;
     }
 
-    public int getNoteDuration() {
-        return noteDuration;
+    public int getDuration() {
+        return duration;
     }
 
-    public void setNoteDuration(int noteDuration) {
-        this.noteDuration = noteDuration;
+    public void setDuration(int duration) {
+        if (this.duration == 1 || this.duration == 2 || this.duration == 4 || this.duration == 8)
+        this.duration = duration;
+        else
+            this.duration = 1;
     }
 
     public double getFrequency() {
@@ -88,9 +105,9 @@ public class Note implements Comparable<Note> {
     @Override
     public String toString() {
         return "Note{" +
-                "noteName='" + noteName + '\'' +
-                ", noteDuration=" + noteDuration +
-                ", frequency=" + frequency +
+                "noteName = '" + noteName + '\'' +
+                ", noteDuration = " + duration +
+                ", frequency = " + frequency + "Hz" +
                 '}';
     }
 }

@@ -10,6 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
 
+        // Note duration: 1 = whole, 2 = half, 4 = quarter, 8 = eighth
         Note note1, note2, note3;
         note1 = new Note("G", 1);
         note2 = new Note("C", 2);
