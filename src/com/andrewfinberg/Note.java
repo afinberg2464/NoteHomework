@@ -12,7 +12,8 @@ public class Note implements Comparable<Note> {
     private double frequency;
 
     /**
-     * This is a HashMap to store the 12 notes in chromatic order
+     * HashMap to store notes in chromatic order
+     * A = 440Hz
      */
     private HashMap<String, Integer> map = new HashMap<>();
 
@@ -32,27 +33,30 @@ public class Note implements Comparable<Note> {
     }
 
     /**
-     * This method first sorts the notes by duration, then by frequency
-     * @param other the second note in the comparison
-     * @return the result of the comparison
+     * Method sorts notes by duration, then by frequency
+     *
+     * @param other Accepts second note for comparison
+     * @return Result of the comparison
      */
     @Override
     public int compareTo(Note other) {
-        if (getDuration() > other.getDuration())
-            return 1;
-        else if (getDuration() < other.getDuration())
-            return -1;
-        else if (getFrequency() > other.getFrequency())
-            return 1;
-        else if (getFrequency() < other.getFrequency())
-            return -1;
-        else
-            return 0;
+        int result = 1;
+        if (getDuration() <= other.getDuration())
+            if (getDuration() < other.getDuration()) {
+                result = -1;
+            } else if (!(getFrequency() > other.getFrequency()))
+                if (getFrequency() < other.getFrequency()) {
+                    result = -1;
+                } else {
+                    result = 0;
+                }
+        return result;
     }
 
     /**
      * This constructor sets the note and duration
      * and calculates the frequency in Hz
+     *
      * @param noteName note name
      * @param duration duration
      */
@@ -67,12 +71,11 @@ public class Note implements Comparable<Note> {
 
     /**
      * This method allows the user to determine if the selected note is natural or sharp
+     *
      * @return This statement returns true if the note is sharp, or false if the note is natural
      */
     public boolean isSharp() {
-        if ((this.noteName.contains("#"))) {
-            return true;
-        } else return false;
+        return (this.noteName.contains("#"));
     }
 
     public String getNoteName() {
@@ -89,7 +92,7 @@ public class Note implements Comparable<Note> {
 
     public void setDuration(int duration) {
         if (this.duration == 1 || this.duration == 2 || this.duration == 4 || this.duration == 8)
-        this.duration = duration;
+            this.duration = duration;
         else
             this.duration = 1;
     }
