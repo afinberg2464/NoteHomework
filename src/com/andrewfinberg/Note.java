@@ -4,12 +4,12 @@ import java.text.DecimalFormat;
 import java.util.HashMap;
 
 /**
- * This is a class to build a single musical note
  * @author andrewfinberg 10/10/2019
  */
-public class Note implements Comparable {
+public class Note implements Comparable<Note> {
     private String noteName;
-    private String noteDuration;
+    private int noteDuration;
+    private double frequency;
 
     /**
      * This is a HashMap to store the 12 notes in chromatic order
@@ -32,68 +32,57 @@ public class Note implements Comparable {
     }
 
     @Override
-    public int compareTo(Object o) {
-        return 0;
+    public int compareTo(Note other) {
+        int i;
+        if (getFrequency() > other.getFrequency())
+            i = 1;
+        else if (getFrequency() < other.getFrequency())
+            i = -1;
+        else i = 0;
+        return i;
     }
 
-    public Note() {
-        this("A", "whole note");
-    }
-
-    public Note(String noteName) {
-        this.noteName = noteName;
-    }
-
-    public Note(String noteName, String noteDuration) {
+    public Note(String noteName, int noteDuration) {
         this.noteName = noteName;
         this.noteDuration = noteDuration;
-    }
 
-    @Override
-    public String toString() {
-        return "Note{" +
-                "noteName='" + noteName + '\'' +
-                ", noteDuration='" + noteDuration + '\'' +
-                ", map=" + map +
-                '}';
-    }
-
-    public String getNoteName() {
-        return this.noteName;
-    }
-
-    public void setNoteName(String noteName) {
-        this.noteName = noteName;
-    }
-
-    public String getNoteDuration() {
-        return this.noteDuration;
-    }
-
-    public void setNoteDuration(String noteDuration) {
-        this.noteDuration = noteDuration;
-    }
-
-    /**
-     * This method allows the user to get the frequency of the selected note
-     *
-     * @return This statement returns the frequency in Hz
-     */
-    public double getFrequency() {
-        double frequency = 440.0 * Math.pow(2.0, this.map.get(noteName) / 12.0);
-        DecimalFormat df = new DecimalFormat("###.##");
-        return frequency;
+        DecimalFormat df = new DecimalFormat("#.##");
+        double f = 440.0 * Math.pow(2.0, this.map.get(noteName) / 12.0);
+        this.frequency = Double.parseDouble(df.format(f));
     }
 
     /**
      * This method allows the user to determine if the selected note is natural or sharp
-     *
      * @return This statement returns true if the note is sharp, or false if the note is natural
      */
     public boolean isSharp() {
         if ((this.noteName.contains("#"))) {
             return true;
         } else return false;
+    }
+
+    public String getNoteName() {
+        return noteName;
+    }
+
+    public void setNoteName(String noteName) {
+        this.noteName = noteName;
+    }
+
+    public int getNoteDuration() {
+        return noteDuration;
+    }
+
+    public void setNoteDuration(int noteDuration) {
+        this.noteDuration = noteDuration;
+    }
+
+    public double getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(double frequency) {
+        this.frequency = frequency;
     }
 
 }
