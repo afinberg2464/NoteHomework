@@ -17,12 +17,12 @@ public class Main {
         note2 = new Note("C", 2);
         note3 = new Note("F", 4);
 
-        // Compare Note objects
+        // Compare objects
         note1.compareTo(note2);
         note2.compareTo(note3);
         note3.compareTo(note1);
 
-        // Create list of Note objects and sort
+        // Create list of objects and sort
         ArrayList<Note> noteArrayList = new ArrayList<>();
         noteArrayList.add(note1);
         noteArrayList.add(note2);
