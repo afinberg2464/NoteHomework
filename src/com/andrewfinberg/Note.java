@@ -63,10 +63,7 @@ public class Note implements Comparable<Note> {
     public Note(String noteName, int duration) {
         this.noteName = noteName;
         this.duration = duration;
-
-        DecimalFormat df = new DecimalFormat("#.##");
-        double f = 440.0 * Math.pow(2.0, this.map.get(noteName) / 12.0);
-        this.frequency = Double.parseDouble(df.format(f));
+        this.frequency = 440.0 * Math.pow(2.0, this.map.get(noteName) / 12.0);
     }
 
     /**
@@ -78,18 +75,35 @@ public class Note implements Comparable<Note> {
         return (this.noteName.contains("#"));
     }
 
+    /**
+     * method to get note name
+     * @return note name
+     */
     public String getNoteName() {
         return noteName;
     }
 
+    /**
+     * method to set note name
+     * @param noteName note name
+     */
     public void setNoteName(String noteName) {
         this.noteName = noteName;
     }
 
+    /**
+     * method to get note duration
+     * @return note duration
+     */
     public int getDuration() {
         return duration;
     }
 
+    /**
+     * method to set note duration
+     * default value is 1
+     * @param duration note duration
+     */
     public void setDuration(int duration) {
         if (this.duration == 1 || this.duration == 2 || this.duration == 4 || this.duration == 8)
             this.duration = duration;
@@ -97,10 +111,18 @@ public class Note implements Comparable<Note> {
             this.duration = 1;
     }
 
+    /**
+     * method to get frequency
+     * @return frequency
+     */
     public double getFrequency() {
         return frequency;
     }
 
+    /**
+     * method to set frequency
+     * @param frequency frequency
+     */
     public void setFrequency(double frequency) {
         this.frequency = frequency;
     }
