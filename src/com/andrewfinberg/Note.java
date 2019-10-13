@@ -1,6 +1,5 @@
 package com.andrewfinberg;
 
-import java.text.DecimalFormat;
 import java.util.HashMap;
 
 /**
